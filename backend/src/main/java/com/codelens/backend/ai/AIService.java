@@ -60,62 +60,29 @@ return response;
     }
 
   public String explainError(String error) {
-
-    return """
-AI Explanation
-
-Error:
+    String prompt = """
+Explain the following error message and suggest a fix:
 %s
-
-Possible Cause:
-• Syntax error in the code.
-• Missing semicolon or incorrect syntax.
-
-Solution:
-• Check syntax carefully.
-• Verify brackets and semicolons.
-• Recompile the program.
-
-Status:
-Demo Mode
 """.formatted(error);
 
-}
+    return askAI(prompt);
+  }
 
-public String reviewCode(String code) {
+  public String reviewCode(String code) {
+    String prompt = """
+Review the following Java code and provide constructive suggestions:
+%s
+""".formatted(code);
 
-    return """
-Code Review
+    return askAI(prompt);
+  }
 
-✔ Code received successfully.
+  public String fixCode(String code) {
+    String prompt = """
+Fix the following Java code and return the corrected version:
+%s
+""".formatted(code);
 
-Suggestions:
-• Use meaningful variable names.
-• Add comments.
-• Follow Java naming conventions.
-• Handle exceptions properly.
-• Remove unused imports.
-
-Overall Rating: ⭐⭐⭐⭐☆
-""";
-
-}
-
-public String fixCode(String code) {
-
-    return """
-Corrected Code
-
-printf("Hello World");
-
-Changes Made:
-✔ Corrected spelling.
-✔ Improved formatting.
-✔ Code is syntactically correct.
-
-Status:
-Demo Mode
-""";
-
-}
+    return askAI(prompt);
+  }
 }
